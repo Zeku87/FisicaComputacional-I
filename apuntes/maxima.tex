@@ -1,0 +1,61 @@
+\documentclass[a4paper, 12pt] {article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\begin{document}
+\title{Apuntes de Maxima}
+\author{Jos\'e Ezequiel Gallardo Mar\'in}
+\date{Marzo 2018}
+\maketitle
+\pagebreak
+\section{Instalación}
+\section{Primeros pasos}
+Abrimos una terminal e introducimos el comando \texttt{maxima} y pulsamos\linebreak \texttt{enter} para que comience a ejecutarse el programa.\newline \newline
+Cada operación debe finalizar con un \texttt{`;'}. A continución, pulsamos \texttt{enter} para que se lleve a cabo. \newline \newline
+Por ejemplo realizamos la siguiente suma:
+\begin{center}
+  (\%i1) 35+65;\\(\%o1) 100
+\end{center}
+La letra \texttt{i} en \texttt{(\%i1)} significa \textit{input} y por tanto es donde tecleamos nuestra operación.
+La letra \texttt{o} en \texttt{(\%o1)} significa \textit{output} e indica la salida de la \linebreak operación.
+\subsection{Variables}
+Para almacenar números y operaciones usamos los dos puntos \texttt{`:'} y \emph{no} el signo igual \texttt{`='}, ya que este último se usa para ecuaciones, por ejemplo
+\begin{center}
+  (\%i2) x:10;\\(\%o2) 100
+\end{center}
+\begin{center}
+    (\%i3) y:x*2;\\(\%o3) 200
+\end{center}
+Acabamos de almacenar en \texttt{`x'} el número 100 y en la variable \texttt{`y'} el doble del valor de \texttt{`x'}, es decir 200. 
+
+Para reiniciar Maxima usamos la orden kill(all). Esto hace que se limpie la memoria y por tanto que se pierdan todas las asignaciones que hemos realizado. Además el programa empieza desde el input 1, (\%i1).
+\pagebreak
+\subsection{Operaciones básicas}
+\subsubsection{Sumar y restar}
+Vamos a almacenar en las variables `x` e `y` los valores 73 y 96 y vamos a sumarlos y a restarlos, pero lo vamos a realizar todo el input en una sola línea
+\begin{center}
+  (\%i1) x:73; y:96; x+y; x-y; \\(\%o1) 73 \\(\%o2) 96 \\(\%o3) 169 \\(\%o4) -23
+\end{center}
+\subsubsection{Multiplicación y división}
+Aprovechando que tenemos los valores almacenados en `x' e `y' relizamos igual que antes operaciones con estas variables, ahora multiplicando y dividiendo por diversas expresiones, por ejemplo
+\begin{center}
+  (\%i5) 10*x; y/2; x*y; y/x; \\(\%o5) 73 \\(\%o6) 96 \\(\%o7) 169 \\(\%o8) -23
+\end{center}
+Como observación, hay que usar siempre el símbolo `*' para multiplicar. Es decir, si en vez de teclear `2*x' tecleamos `2x' entonces nos saldrá un error. Y si tecleamos `xy' en vez de `x*y' entonces Maxima interpreta que `xy' es una variable. Así es, las variables pueden ser cadenas de caracteres también, por ejemplo
+\begin{center}
+    (\%i9) juan:2; juan*5;\\(\%o9) 2\\(\%o10) 10
+\end{center}
+Hay que tener cuidado de no usar variables que ya han sido asignadas sin darnos cuenta porque esto inducirá errores en nuestras operaciones.
+\pagebreak
+\subsubsection{Potencias}
+Para elevar un número o expresión a una potencia cualquiera usaremos el acento circunflejo `\^{}'.
+\begin{center}
+    (\%i11) y\^{}2;\\(\%o11) 9216
+\end{center}
+La raíz cuadrada podemos hacerla de dos formas posibles, elevando a un medio la expresión o usando la función sqrt()
+\begin{center}
+    (\%i12) 81\^{}(1/2); sqrt(9);\\(\%o12) 9\\(\%o13) 3
+\end{center}
+
+
+\end{document}
