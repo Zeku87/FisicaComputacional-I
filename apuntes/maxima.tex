@@ -8,15 +8,79 @@
 \date{Marzo 2018}
 \maketitle
 \pagebreak
+
 \section{Instalación}
+\subsection{Instalación rápida}
+Para instalar Maxima rápidamente tan solo tendremos que ir a la siguiente dirección
+\begin{center}
+http://maxima.sourceforge.net/download.html
+\end{center}
+En esta página encontramos directamente el binario para ejecutar la instalación, incluso podemos instalarlo para el sistema operativo Android.
+
+\subsection{Instalación en GNU/Linux desde código fuente enfocada a Debian}
+Si por alguna razón queremos compilar la fuente lo primero es descargar de la forja el programa Maxima en su versión más reciente en el siguiente link
+\begin{center}
+  https://sourceforge.net/projects/maxima/files/latest/download
+\end{center}
+Abrimos la terminal, navegamos al destino deseado y mediante el programa \texttt{tar} extraemos el contenido en dicha ubicación tal y como sigue
+\begin{center}
+\$ cd ~/FisicaComputacional/Programas \\
+\$ tar -vxf ~/Descargas/maxima-5.41.0.tar.gz 
+\end{center}
+
+\subsubsection{Compilando Maxima}
+El siguiente paso es compilar Maxima. Este puede ser compilado con SBCL, Clisp, CCL, GCL, CMUCL, ECL, Scieneer Common Lisp (SCL) o Allegro Common Lisp (ACL).\\\\
+Yo he elegido Clisp para compilar Maxima. Si no está instalado en nuestro sistema podemos instalarlo mediante Aptitude o Synaptic. Usando la siguiente orden podríamos instalar Clisp
+\begin{center}
+\$ sudo apt-get install clisp
+\end{center}
+Si por cualquier motivo no es posible instalarlo desde nuestra interfaz podemos descargar los paquetes desde la forja, siguiendo el enlace de abajo
+\begin{center}
+  https://clisp.sourceforge.io/ 
+\end{center}
+Dentro de la página miramos en el frame de la derecha titulado ``Get CLISP'' y un poco más abajo en ese mismo frame donde pone ``Linux packages'' están los enlaces dependiendo de nuestra distribución para descargar los paquetes necesarios.\\\\
+En mi caso, mi distribución está basada en debian y por tanto hago clic en debian lo cual nos lleva a la siguiente dirección
+\begin{center}
+  https://packages.debian.org/search?keywords=clisp
+\end{center}
+En la página web, el paquete buscado debe aparecer el primero en la búqueda bajo el nombre ``Package clisp''. Haríamos clic en ``wheezy (oldoldstable)'' ya que es la única versión estable que aparece.\\\\
+En la siguiente página hacemos scroll hasta el final donde está el apartado de descargas que aparece titulado como ``Download clisp'' y elegimos la arquitectura de nuestro ordenador haciendo clic sobre ella, en mi caso amd64\\\\
+Por último, se nos presentará una página desde donde podemos descargar el paquete haciendo clic en cualquiera de los enlaces espejos que se presentan ubicados alrededor del mundo.\\\\
+Con el paquete ya descargado hacemos uso de la terminal para instalarlo en el sistema mediante el comando \texttt{dpkg} como sigue
+
+\begin{center}
+sudo dpkg --install /home/Usuario/Descargas/clisp\_2.49-8.1\_amd64.deb 
+\end{center}
+Si se encuentran dependencias sin satisfacer tendremos que instalarlas bien mediante aptitude o synaptic, o bien de forma manual yendo a la web https://packages.debian.org.\\\\
+Normalmente las dos dependencias que suelen faltar son \texttt{libffcall1} y \texttt{libreadline5} cuyos paquetes podemos encontrar en las siguientes \linebreak direcciones
+\begin{center}
+  https://packages.debian.org/wheezy/libffcall1
+  https://packages.debian.org/wheezy/libreadline5
+\end{center}
+\subsubsection{Instalando Maxima}
+Volvamos ahora a la instalación de Maxima yendo a la ubicación donde extraímos el archivo tar
+\begin{center}
+\$ cd ~/FisicaComputacional/Programas/maxima-5.41.0 \\
+\end{center}
+
+Usando GNU Autotools introducimos los siguientes comandos
+\begin{center}
+\$  ./configure\\
+\$  make\\
+\$  make check\\
+\$  sudo make install\\
+\end{center}
+
+Por último iniciamos el programa en la terminal escribiendo en ella la orden \texttt{maxima}.
+
 \section{Primeros pasos}
-Abrimos una terminal e introducimos el comando \texttt{maxima} y pulsamos\linebreak \texttt{enter} para que comience a ejecutarse el programa.\newline \newline
-Cada operación debe finalizar con un \texttt{`;'}. A continución, pulsamos \texttt{enter} para que se lleve a cabo. \newline \newline
+Abrimos una terminal e introducimos el comando \texttt{maxima} y pulsamos\linebreak \texttt{enter} para que comience a ejecutarse el programa.\\\\
+Cada operación debe finalizar con un \texttt{`;'}. A continución, pulsamos \texttt{enter} para que se lleve a cabo.\\\\
 Por ejemplo realizamos la siguiente suma:
 \begin{center}
   (\%i1) 35+65;\\(\%o1) 100
 \end{center}
-La letra \texttt{i} en \texttt{(\%i1)} significa \textit{input} y por tanto es donde tecleamos nuestra operación.
+La letra \texttt{i} en \texttt{(\%i1)} significa \textit{input} y por tanto es donde tecleamos nuestra operación.\\
 La letra \texttt{o} en \texttt{(\%o1)} significa \textit{output} e indica la salida de la \linebreak operación.
 \subsection{Variables}
 Para almacenar números y operaciones usamos los dos puntos \texttt{`:'} y \emph{no} el signo igual \texttt{`='}, ya que este último se usa para ecuaciones, por ejemplo
@@ -26,8 +90,7 @@ Para almacenar números y operaciones usamos los dos puntos \texttt{`:'} y \emph
 \begin{center}
     (\%i3) y:x*2;\\(\%o3) 200
 \end{center}
-Acabamos de almacenar en \texttt{`x'} el número 100 y en la variable \texttt{`y'} el doble del valor de \texttt{`x'}, es decir 200. 
-
+Acabamos de almacenar en \texttt{`x'} el número 100 y en la variable \texttt{`y'} el doble del valor de \texttt{`x'}, es decir 200.\\\\
 Para reiniciar Maxima usamos la orden kill(all). Esto hace que se limpie la memoria y por tanto que se pierdan todas las asignaciones que hemos realizado. Además el programa empieza desde el input 1, (\%i1).
 \pagebreak
 \subsection{Operaciones básicas}
@@ -56,6 +119,13 @@ La raíz cuadrada podemos hacerla de dos formas posibles, elevando a un medio la
 \begin{center}
     (\%i12) 81\^{}(1/2); sqrt(9);\\(\%o12) 9\\(\%o13) 3
 \end{center}
+
+\subsection{Órdenes útiles de Maxima}
+Maxima nos da la posibilidad de hacer referencia a una expresión anterior haciendo uso de la numeración de los inputs y los outputs. Por ejemplo si queremos hacer el logaritmo natural del resultado que ha salido en el output número 12 hacemos lo siguiente
+\begin{center}
+    (\%i14) log(\%o12)\\(\%o14) log(9)
+\end{center}
+
 
 
 \end{document}
