@@ -1,0 +1,49 @@
+normalHermiteFilas(A):=
+block([m,n,M,k,N,M0,cpiv,cnopiv,poscol,j,Q], 
+       [m,n]:matrix_size(A),
+       M:echelon(A),
+       /* Localizamos los pivotes. 
+          Para ello, creamos una lista con las columnas donde están los pivotes: */
+       k:1,
+       N:1,
+       cpiv:[],
+       cnopiv:makelist(i,i,n),
+       while (k<=m and N#0) do
+       (
+            j:1,
+            while (M[k,j]=0 and j<=n and N#0) do
+            (
+                 j:j+1
+            ),
+            cpiv:append(cpiv,[j]), 
+            cnopiv:delete(j,cnopiv),
+            k:k+1,
+            N:mat_norm(row(M,k),1)   
+       ),
+       cpiv:reverse(cpiv),
+       poscol:append(cpiv,cnopiv),
+       /* Esta lista poscol nos indica como tenemos que intercambiar las columnas */        
+       /* Intercambiamos las columnas: */ 
+       M0:transpose(M),
+       for i: 1 thru n do
+       (
+            M0[i]:transpose(col(M,poscol[i]))[1]
+       ),
+       M0:transpose(M0),
+       /* Intercambiamos las filas utilizando la matriz Q: */ 
+       Q:ident(m),
+       for i: 1 thru length(cpiv) do
+       (
+           Q[i]:ident(m)[length(cpiv)+1-i]
+       ),
+       M:echelon(Q.M0),
+       /* Deshacemos el intercambio de filas: */ 
+       M0:Q.M,
+       /* Deshacemos el intercambio de columnas: */
+       M:transpose(M0),
+       for i: 1 thru n do
+       (
+            M[poscol[i]]:transpose(col(M0,i))[1]
+       ),
+       M:transpose(M)
+       )$
