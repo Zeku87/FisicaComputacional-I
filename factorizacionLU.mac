@@ -1,0 +1,19 @@
+factorizaLU(A):=
+	block([n,L,U,Lk,c],
+	n:length(A),
+	U:1*A,
+	L:matrix([]),
+	for k:1 thru n-1 do(
+	/* Creamos la columna c con 0 y los l_ik: */
+		c:transpose(
+		(1/U[k,k])*append(makelist(0,i,1,k),makelist(U[i,k],i,k+1,n))),
+		/* Guardamos la columna c en la matriz L: */
+		L:addcol(L,c),
+		/* Calculamos la matriz Lk: */
+		ek:zeromatrix(1,n),
+		ek[1,k]:1,
+		Lk:ident(n)-c.ek,
+		/* Hacemos ceros en la columna k: */
+		U:Lk.U),
+	L:addcol(L, [0,0,0,0])+ident(matrix_size(L)[1]),
+[L,U])$
