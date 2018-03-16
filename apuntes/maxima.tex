@@ -127,5 +127,66 @@ Maxima nos da la posibilidad de hacer referencia a una expresión anterior hacie
 \end{center}
 
 
+\section{Álgebra lineal con Maxima}
+
+\subsection{Operaciones con matrices}
+Definir matriz\\\\
+A:matrix([1,2,1],[2,1,0],[0,3,1]);\\
+B:matrix([2,1,0],[2,5,1],[3,2,4]);\\
+
+Suma A+B\\
+Resta A-B\\
+Multiplicación entre matrices A.B\\
+Potencia A\^\^2\\
+Transpuesta transpose(B)\\
+Inversa invert(A)\\\\
+
+Mas ordenes utiles\\
+A[i, j] nos da el elemento de la matriz A que está en la posición (i, j).\\
+matrix\_size(A) devuelve una lista con el número de filas y columnas de la matriz A.\\
+submatrix(i1, . . . , im, A, j1, . . . , jn): devuelve la submatriz de A que resulta al eliminar las filas i1, . . . , im y las columnas j1, . . . , jn.\\
+A[i]: devuelve la i-ésima fila de la matriz A.\\
+col(A,i): devuelve la i-ésima columna de la matriz A.\\
+addrow(A, fila1, . . . ,filan): añade las filas dadas por las listas (o matrices fila) a la matriz A.\\
+addcol(A, col1, . . . ,coln): añade las columnas dadas por las listas a la matriz A.\\
+determinant(A): calcula el determinante de la matriz A.\\
+ident(n): devuelve la matriz indentidad de orden n.\\
+
+\subsection{Transformaciones elementales por filas}
+rowswap(A,i,j): intercambia las filas i y j de la matriz A\\
+rowop(A,i,j,−α): trasnformacion F_i + αF_j. Devuelve la matriz equivalente con la fila F_i actualizada\\
+Para transformaciones tipo αF_j haremos: M:1*A\$ M[j]:α*A[j]\$ M;\\
+Por ejemplo\\
+M:1*A$ M[1]:2*A[1]$ M;\\
+Multiplica por dos la primera fila de la matriz A.\\
+
+\subsection{Matriz escalonada por filas}
+
+Para hallar una matriz escalonada por filas equivalente por filas a A usamos la orden\\
+echelon(A)\\
+Por ejemplo\\
+C:matrix([5,1,2],[4,1,0],[1,0,1]);\\
+echelon(C);\\
+
+Para la hallar la forma normal de Hermite por filas descargaos el fichero normalHermite.mac\\
+load(/ruta/normalHermite.mac);\\
+normalHermiteFilas(C);\\
+Devuelve en este caso la matriz identidad de orden 3\\
+
+\subsection{Sistemas de ecuaciones lineales}
+Para resolver sistemas lineales de ecuaciones usamos la orden linsolve\\
+linsolve([x-2*y-z = 1,x-y=1,2*x+y-3*z=4],[x,y,z]);\\
+insolve([x-2*y-z = 1,x-y=1,-z-3*y+2*x=2],[x,y,z]);\\
+solve: dependent equations eliminated: (3)\\
+[x = 1 − \%r1, y = − \%r1, z = \%r1]\\\\
+Obsérvese que los parámetros que aparecen en la solución de sistemas compatibles indeterminados se
+denotan en la forma \%r1, \%r2, ...
+
+\subsection{Factorización LU de matrices cuadradas}
+Descargamos el fichero factorizacionLU.mac y lo cargamos en Maxima con la orden\\
+load(/ruta/factorizacionLU.mac);\\
+Invocando la orden\\
+factorizaLU(A);\\
+Nos devuelve las matrices L y U\\
 
 \end{document}
