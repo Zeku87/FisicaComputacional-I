@@ -15,5 +15,5 @@ factorizaLU(A):=
 		Lk:ident(n)-c.ek,
 		/* Hacemos ceros en la columna k: */
 		U:Lk.U),
-	L:addcol(L, [0,0,0,0])+ident(matrix_size(L)[1]),
+	L:addcol(L, zeromatrix(1,n))+ident(n),
 [L,U])$
